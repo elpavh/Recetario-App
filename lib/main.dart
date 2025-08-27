@@ -35,6 +35,7 @@ class RecipeBook extends StatelessWidget {
              Colors.white)
              ),
           bottom: TabBar(
+            isScrollable: true, // ordena de izqueirda a derecha si hay muchas tabs
             indicatorColor: Colors.white,
             labelColor: Colors.white,
             unselectedLabelColor: Colors.white70,
