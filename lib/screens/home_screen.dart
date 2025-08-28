@@ -31,6 +31,7 @@ Future<void> _showBottom(BuildContext context) async {
           return SingleChildScrollView(
             controller: scrollController,
             child: Container( 
+            height: MediaQuery.of(context).size.height * 0.6, // 60% de la pantalla
             color:Colors.white,
             child: RecipeForm(),
             ),
