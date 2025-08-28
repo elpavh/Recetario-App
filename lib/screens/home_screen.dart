@@ -26,7 +26,7 @@ Future<void> _showBottom(BuildContext context) async {
       builder: (BuildContext context) {
         return Container(
           height: 200,
-          color: Colors.white,
+          color: Colors.orange,
           child: Center(
             child: Text('This is a modal bottom sheet'),
           ),
@@ -78,5 +78,30 @@ Future<void> _showBottom(BuildContext context) async {
               ),
             ),
     );
+  }
+}
+
+
+class RecipeForm extends StatelessWidget {
+  const RecipeForm({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(padding: EdgeInsets.all(8) ,
+    child: Form(
+      //key: _formKey,
+      child:Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Add New Recipe',
+           style: TextStyle(
+            fontSize: 24, 
+            fontWeight: FontWeight.bold),),
+
+        ],
+
+      ),
+      )
+      );
   }
 }
