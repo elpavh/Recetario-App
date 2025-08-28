@@ -28,7 +28,7 @@ class RecipeBook extends StatelessWidget {
       length: 1,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.blueAccent,
+          backgroundColor: Colors.red,
           title: Text(
             'Recipe Book', 
             style: TextStyle(color:

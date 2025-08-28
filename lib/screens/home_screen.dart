@@ -26,9 +26,9 @@ class HomeScreen extends StatelessWidget {
                     Container(
                       height: 125,
                       width: 100,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10.0),
-                        child: Container(),
+                      decoration: BoxDecoration(
+                        color: Colors.orange,
+                        borderRadius: BorderRadius.circular(12),
                       ),
                     ),
                     SizedBox(width: 26),
@@ -36,14 +36,14 @@ class HomeScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center, // se agrego para que se centre la informacion en el medio
                       crossAxisAlignment: CrossAxisAlignment.start,// Siempre de manera horizontal este ubicado al inicio
                       children: <Widget> [
-                        Text("Lasgna"),
+                        Text("Lasgna", style: TextStyle(fontSize: 16,fontFamily: 'Quicksan',fontWeight: FontWeight.bold)), // se agrego fontWeight.bold para que el nombre de la receta se vea en negrita
                         SizedBox(height: 4,), // Se agregaron sizebox en height esto porque estamos usando una columna para dar espacio
                         Container( // Movimos de lugar el container para que la linea naranja divida el nobmre del autor
                           height: 2,
                           width: 75,
                           color: Colors.orange
                         ),
-                        Text('Pablo V.'),
+                        Text('Pablo V.', style: TextStyle(fontSize: 16,fontFamily: 'Quicksan')), // se agrego TextStyle para darle estilo y fuente
                         SizedBox(height: 4,),
                         
                     ],)
