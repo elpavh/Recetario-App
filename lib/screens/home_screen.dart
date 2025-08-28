@@ -28,7 +28,10 @@ class HomeScreen extends StatelessWidget {
                       width: 100,
                       decoration: BoxDecoration(
                         color: Colors.orange,
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.only( // se agrego borderRadius.only para que las esquinas izquierdas del contenedor esten redondeadas
+                          topLeft: Radius.circular(12),
+                          bottomLeft: Radius.circular(12)
+                        ),
                       ),
                     ),
                     SizedBox(width: 26),
