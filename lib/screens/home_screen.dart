@@ -10,9 +10,32 @@ class HomeScreen extends StatelessWidget {
         _RecipesCard(context),
         _RecipesCard(context),
       ],
-      )
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.orange,
+        child: Icon(Icons.add,color:Colors.white,),
+        onPressed: () {
+          _showBottom(context);
+        },),
     );
   }
+
+Future<void> _showBottom(BuildContext context) async {
+    return showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: 200,
+          color: Colors.white,
+          child: Center(
+            child: Text('This is a modal bottom sheet'),
+          ),
+        );
+      },
+    );
+  }
+
+
 
   Widget _RecipesCard(BuildContext context) {
     return Padding(
