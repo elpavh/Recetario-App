@@ -26,10 +26,8 @@ Future<void> _showBottom(BuildContext context) async {
       builder: (BuildContext context) {
         return Container(
           height: 200,
-          color: Colors.orange,
-          child: Center(
-            child: Text('This is a modal bottom sheet'),
-          ),
+          color: Colors.white,
+          child: RecipeForm(),
         );
       },
     );
@@ -97,11 +95,49 @@ class RecipeForm extends StatelessWidget {
            style: TextStyle(
             fontSize: 24, 
             fontWeight: FontWeight.bold),),
-
+          SizedBox(height: 16,),
+          _buildTextField(label:  'Recipe Name'),
         ],
 
       ),
       )
       );
   }
+
+  // Widget _buildTextField(){  // ejemplo de un TextField con validacion
+  //   return TextFormField(
+  //     decoration: InputDecoration(
+  //       labelText: 'Recipe Name',
+  //       border: OutlineInputBorder(),
+  //     ),
+  //     validator: (value){
+  //       if(value == null || value.isEmpty){
+  //         return 'Please enter some text';
+  //       }
+  //       return null;
+  //     },
+  //   );
+  // }
+
+  // TextField del curso
+
+  Widget _buildTextField({required String label}){
+    return TextFormField(
+      decoration: InputDecoration(
+        labelText: label ,
+        labelStyle: TextStyle(
+          fontFamily: 'Quicksan',
+          fontSize: 16,
+          color: Colors.orange,),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10),),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.orange),
+          borderRadius: BorderRadius.circular(  10),
+        )
+      ),
+    );
+  }
+
 }
