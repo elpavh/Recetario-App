@@ -6,9 +6,9 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:Column(children: <Widget> [
-        _RecipesCard(context),
-        _RecipesCard(context),
+      body: ListView(children: <Widget> [
+        _RecipesCard(context,title: 'Lasgna', author: 'By PVH', imagePath: 'assets/images/lasagna.jpg',),
+        _RecipesCard(context,title: 'Tacos al pastor', author: 'By PVH', imagePath: 'assets/images/tacospastor.jpeg',), 
       ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -34,10 +34,11 @@ Future<void> _showBottom(BuildContext context) async {
   }
 
 
-
-  Widget _RecipesCard(BuildContext context) {
+  Widget _RecipesCard(BuildContext context,{ required String title,
+  required String author,
+  required String imagePath,}) {
     return Padding(
-      padding: const EdgeInsets.all(8.0), // se colo el padding para que exista separacion entre los RecipesCard
+      padding: const EdgeInsets.all(8.0), 
       child: Container(
           width:MediaQuery.of(context).size.width,
           height: 125,
@@ -47,12 +48,12 @@ Future<void> _showBottom(BuildContext context) async {
                     Container(
                       height: 125,
                       width: 100,
-                      child: ClipRRect( // se agrego ClipRRect para que la imagen tenga las esquinas redondeadas
+                      child: ClipRRect( 
                         borderRadius: BorderRadius.only( 
                           topLeft: Radius.circular(12),
                           bottomLeft: Radius.circular(12)
                         ),
-                        child: Image.asset('assets/images/lasagna.jpg', fit: BoxFit.cover),
+                        child: Image.asset(imagePath, fit: BoxFit.cover),
                       ),
                     ),
                     SizedBox(width: 26),
@@ -60,14 +61,14 @@ Future<void> _showBottom(BuildContext context) async {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget> [
-                        Text("Lasgna", style: TextStyle(fontSize: 16,fontFamily: 'Quicksan',fontWeight: FontWeight.bold)),
+                        Text(title, style: TextStyle(fontSize: 16,fontFamily: 'Quicksan',fontWeight: FontWeight.bold)),
                         SizedBox(height: 4,), 
                         Container( 
                           height: 2,
                           width: 75,
                           color: Colors.orange
                         ),
-                        Text('Pablo V.', style: TextStyle(fontSize: 16,fontFamily: 'Quicksan')), 
+                        Text(author, style: TextStyle(fontSize: 16,fontFamily: 'Quicksan')), 
                         SizedBox(height: 4,),
                         
                     ],)
