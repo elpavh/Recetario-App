@@ -21,17 +21,25 @@ class HomeScreen extends StatelessWidget {
   }
 
 Future<void> _showBottom(BuildContext context) async {
-    return showModalBottomSheet(
-      context: context,
-      builder: (BuildContext context) {
-        return Container(
-          height: 200,
-          color: Colors.white,
-          child: RecipeForm(),
-        );
-      },
-    );
-  }
+  return showModalBottomSheet(
+    context: context,
+    isScrollControlled: true, // 🔥 para que crezca con el teclado
+    builder: (BuildContext context) {
+      return DraggableScrollableSheet(
+        expand: false,
+        builder: (context, scrollController) {
+          return SingleChildScrollView(
+            controller: scrollController,
+            child: Container( 
+            color:Colors.white,
+            child: RecipeForm(),
+            ),
+          ); // ✅ aquí va el ;
+        },
+      );
+    },
+  );
+}
 
 
   Widget _RecipesCard(BuildContext context,{ required String title,
@@ -86,23 +94,32 @@ class RecipeForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(padding: EdgeInsets.all(8) ,
-    child: Form(
-      //key: _formKey,
-      child:Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('Add New Recipe',
-           style: TextStyle(
-            fontSize: 24, 
-            fontWeight: FontWeight.bold),),
-          SizedBox(height: 16,),
-          _buildTextField(label:  'Recipe Name'),
-        ],
-
+    return Padding(
+      padding: EdgeInsets.all(8),
+      child: Form(
+        //key: _formKey,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Add New Recipe',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 16),
+              _buildTextField(label: 'Recipe Name'),
+              SizedBox(height: 12),
+              _buildTextField(label: 'Author'),
+              SizedBox(height: 12),
+              _buildTextField(label: 'Description'),
+              SizedBox(height: 12),
+              _buildTextField(label: 'Ingredients'),
+              SizedBox(height: 16),
+            ],
+          ),
+        ),
       ),
-      )
-      );
+    );
   }
 
   // Widget _buildTextField(){  // ejemplo de un TextField con validacion
