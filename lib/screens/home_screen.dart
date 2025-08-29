@@ -118,35 +118,13 @@ class RecipeForm extends StatelessWidget {
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 16),
-              _buildTextField(controller:_recipeNameController,label: 'Recipe Name',
-                validator: (value){
-                  if(value == null || value.isEmpty){
-                    return 'Please enter recipe name';
-                  }
-                  return null;
-                },
-              ),
+              _buildTextField(controller:_recipeNameController,label: 'Recipe Name',isRequired: true,), // 🔥 marca este campo como obligatorio
               SizedBox(height: 12),
-              _buildTextField(controller:_authorController,label: 'Author', validator: (value){
-                  if(value == null || value.isEmpty){
-                    return 'Please enter recipe name';
-                  }
-                  return null;
-                },),
+              _buildTextField(controller:_authorController,label: 'Author',isRequired: true,),
               SizedBox(height: 12),
-              _buildTextField(controller:_imagePathController,label: 'Image URL or Path', validator: (value){
-                  if(value == null || value.isEmpty){
-                    return 'Please enter recipe name';
-                  }
-                  return null;
-                },),
+              _buildTextField(controller:_imagePathController,label: 'Image URL or Path',isRequired: true,),
               SizedBox(height: 12),
-              _buildTextField(controller:_recipeController,label: 'Recipe', validator: (value){
-                  if(value == null || value.isEmpty){
-                    return 'Please enter recipe name';
-                  }
-                  return null;
-                },),
+              _buildTextField(controller:_recipeController,label: 'Recipe',isRequired: true,),
               SizedBox(height: 16),
             ],
           ),
@@ -171,27 +149,35 @@ class RecipeForm extends StatelessWidget {
   // }
 
   // TextField del curso
-
-  Widget _buildTextField(
-    {required String label,
-     required TextEditingController? controller,
-     required String? Function(String?)? validator,}){
-    return TextFormField(
-      decoration: InputDecoration(
-        labelText: label ,
-        labelStyle: TextStyle(
-          fontFamily: 'Quicksan',
-          fontSize: 16,
-          color: Colors.orange,),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(10),),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.orange),
-          borderRadius: BorderRadius.circular(  10),
-        )
+Widget _buildTextField({
+  required String label,
+  required TextEditingController controller,
+  bool isRequired = false, // 🔥 bandera para marcar si es obligatorio
+}) {
+  return TextFormField(
+    controller: controller,
+    validator: (value) {
+      if (isRequired && (value == null || value.isEmpty)) {
+        return 'Please enter $label'; // usa el label como mensaje
+      }
+      return null;
+    },
+    decoration: InputDecoration(
+      labelText: label,
+      labelStyle: TextStyle(
+        fontFamily: 'Quicksan',
+        fontSize: 16,
+        color: Colors.orange,
       ),
-    );
-  }
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.orange),
+        borderRadius: BorderRadius.circular(10),
+      ),
+    ),
+  );
+}
 
 }
