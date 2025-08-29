@@ -128,6 +128,31 @@ class RecipeForm extends StatelessWidget {
               SizedBox(height: 12),
               _buildTextField(controller:_recipeController,label: 'Recipe',isRequired: true,),
               SizedBox(height: 16),
+              Center(
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState != null &&
+                        _formKey.currentState!.validate()) {
+                      // Aquí puedes manejar el envío del formulario
+                      Navigator.pop(context);
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.orange,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  child: Text(
+                    'Submit Recipe',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
@@ -135,26 +160,28 @@ class RecipeForm extends StatelessWidget {
     );
   }
 
-  // Widget _buildTextField(){  // ejemplo de un TextField con validacion
-  //   return TextFormField(
-  //     decoration: InputDecoration(
-  //       labelText: 'Recipe Name',
-  //       border: OutlineInputBorder(),
-  //     ),
-  //     validator: (value){
-  //       if(value == null || value.isEmpty){
-  //         return 'Please enter some text';
-  //       }
-  //       return null;
-  //     },
-  //   );
-  // }
+// Ejemplo de Elevated Button centrado
+              // Center(
+              //   child: ElevatedButton(
+              //     style: ElevatedButton.styleFrom(
+              //       backgroundColor: Colors.orange,
+              //     ),
+              //     onPressed: () {
+              //       if (_formKey.currentState!.validate()) {
+              //         // Aquí puedes manejar el envío del formulario
+              //         Navigator.pop(context); // Cierra el modal
+              //       }
+              //     },
+              //     child: Text('Submit', style: TextStyle(color: Colors.white)),
+              //   ),
+              // )
 
-  // TextField del curso
+
 Widget _buildTextField({
   required String label,
   required TextEditingController controller,
   bool isRequired = false, // 🔥 bandera para marcar si es obligatorio
+  int maxLines = 1,
 }) {
   return TextFormField(
     controller: controller,
@@ -179,6 +206,7 @@ Widget _buildTextField({
         borderRadius: BorderRadius.circular(10),
       ),
     ),
+    maxLines: maxLines,
   );
 }
 
