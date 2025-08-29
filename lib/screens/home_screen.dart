@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../helper_functions.dart';
+
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -9,6 +11,7 @@ class HomeScreen extends StatelessWidget {
       body: ListView(children: <Widget> [
         _RecipesCard(context,title: 'Lasgna', author: 'By PVH', imagePath: 'assets/images/lasagna.jpg',),
         _RecipesCard(context,title: 'Tacos al pastor', author: 'By PVH', imagePath: 'assets/images/tacospastor.jpeg',), 
+        _RecipesCard(context,title: 'Quesabirria', author: 'By PVH', imagePath: 'https://s3.amazonaws.com/static.realcaliforniamilk.com/media/recipes_2/Quesabirria_Tacos.jpg',), 
       ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -48,13 +51,13 @@ Future<void> _showBottom(BuildContext context) async {
   required String imagePath,}) {
     return Padding(
       padding: const EdgeInsets.all(8.0), 
-      child: Container(
+      child: SizedBox(
           width:MediaQuery.of(context).size.width,
           height: 125,
           child: Card(
                 child: Row(
                   children: <Widget>[
-                    Container(
+                    SizedBox(
                       height: 125,
                       width: 100,
                       child: ClipRRect( 
@@ -62,7 +65,7 @@ Future<void> _showBottom(BuildContext context) async {
                           topLeft: Radius.circular(12),
                           bottomLeft: Radius.circular(12)
                         ),
-                        child: Image.asset(imagePath, fit: BoxFit.cover),
+                        child: displayImage(imagePath),
                       ),
                     ),
                     SizedBox(width: 26),
@@ -95,10 +98,17 @@ class RecipeForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _formKey = GlobalKey<FormState>(); // Se agrega FormState para que sepa que va guardar el estado del formulario
+    
+    final TextEditingController _recipeNameController = TextEditingController();
+    final TextEditingController _authorController = TextEditingController();
+    final TextEditingController _imagePathController = TextEditingController();
+    final TextEditingController _recipeController = TextEditingController();
+    
     return Padding(
       padding: EdgeInsets.all(8),
       child: Form(
-        //key: _formKey,
+        key: _formKey,
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -108,13 +118,35 @@ class RecipeForm extends StatelessWidget {
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 16),
-              _buildTextField(label: 'Recipe Name'),
+              _buildTextField(controller:_recipeNameController,label: 'Recipe Name',
+                validator: (value){
+                  if(value == null || value.isEmpty){
+                    return 'Please enter recipe name';
+                  }
+                  return null;
+                },
+              ),
               SizedBox(height: 12),
-              _buildTextField(label: 'Author'),
+              _buildTextField(controller:_authorController,label: 'Author', validator: (value){
+                  if(value == null || value.isEmpty){
+                    return 'Please enter recipe name';
+                  }
+                  return null;
+                },),
               SizedBox(height: 12),
-              _buildTextField(label: 'Description'),
+              _buildTextField(controller:_imagePathController,label: 'Image URL or Path', validator: (value){
+                  if(value == null || value.isEmpty){
+                    return 'Please enter recipe name';
+                  }
+                  return null;
+                },),
               SizedBox(height: 12),
-              _buildTextField(label: 'Ingredients'),
+              _buildTextField(controller:_recipeController,label: 'Recipe', validator: (value){
+                  if(value == null || value.isEmpty){
+                    return 'Please enter recipe name';
+                  }
+                  return null;
+                },),
               SizedBox(height: 16),
             ],
           ),
@@ -140,7 +172,10 @@ class RecipeForm extends StatelessWidget {
 
   // TextField del curso
 
-  Widget _buildTextField({required String label}){
+  Widget _buildTextField(
+    {required String label,
+     required TextEditingController? controller,
+     required String? Function(String?)? validator,}){
     return TextFormField(
       decoration: InputDecoration(
         labelText: label ,
