@@ -9,9 +9,11 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(children: <Widget> [
-        _RecipesCard(context,title: 'Lasgna', author: 'By PVH', imagePath: 'assets/images/lasagna.jpg',),
-        _RecipesCard(context,title: 'Tacos al pastor', author: 'By PVH', imagePath: 'assets/images/tacospastor.jpeg',), 
-        _RecipesCard(context,title: 'Quesabirria', author: 'By PVH', imagePath: 'https://s3.amazonaws.com/static.realcaliforniamilk.com/media/recipes_2/Quesabirria_Tacos.jpg',), 
+        _recipesCard(context,title: 'Lasgna', author: 'By PVH', imagePath: 'assets/images/lasagna.jpg',),
+        _recipesCard(context,title: 'Tacos al pastor', author: 'By PVH', imagePath: 'assets/images/tacospastor.jpeg',), 
+        _recipesCard(context,title: 'Quesabirria', author: 'By PVH', imagePath: 'https://s3.amazonaws.com/static.realcaliforniamilk.com/media/recipes_2/Quesabirria_Tacos.jpg',), 
+        _recipesCard(context,title: 'Enchiladas verdes', author: 'By PVH', imagePath: 'assets/images/enchiladasverdes.jpg',),
+        _recipesCard(context,title: 'Chiles en nogada', author: 'By PVH', imagePath: 'https:////s3.amazonaws.com/static.realcaliforniamilk.com/media/recipes_2/Quesabirria.jpg',),
       ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -46,9 +48,9 @@ Future<void> _showBottom(BuildContext context) async {
 }
 
 
-  Widget _RecipesCard(BuildContext context,{ required String title,
+  Widget _recipesCard(BuildContext context,{ required String title,
   required String author,
-  required String imagePath,}) {
+   String imagePath = '',}) {
     return Padding(
       padding: const EdgeInsets.all(8.0), 
       child: SizedBox(
