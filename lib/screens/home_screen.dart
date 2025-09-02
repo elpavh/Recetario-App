@@ -62,7 +62,7 @@ Future<void> _showBottom(BuildContext context) async {
    String imagePath = '',}) {
     return GestureDetector(
       onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => const RecipeDetail()));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => const RecipeDetail(recipeName: 'Lasagna',)));
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0), 
