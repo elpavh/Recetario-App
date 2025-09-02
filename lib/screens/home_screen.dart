@@ -108,17 +108,17 @@ class RecipeForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>(); // Se agrega FormState para que sepa que va guardar el estado del formulario
+    final formKey = GlobalKey<FormState>(); // Se agrega FormState para que sepa que va guardar el estado del formulario
     
-    final TextEditingController _recipeNameController = TextEditingController();
-    final TextEditingController _authorController = TextEditingController();
-    final TextEditingController _imagePathController = TextEditingController();
-    final TextEditingController _recipeController = TextEditingController();
+    final TextEditingController recipeNameController = TextEditingController();
+    final TextEditingController authorController = TextEditingController();
+    final TextEditingController imagePathController = TextEditingController();
+    final TextEditingController recipeController = TextEditingController();
     
     return Padding(
       padding: EdgeInsets.all(8),
       child: Form(
-        key: _formKey,
+        key: formKey,
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -128,19 +128,19 @@ class RecipeForm extends StatelessWidget {
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 16),
-              _buildTextField(controller:_recipeNameController,label: 'Recipe Name',isRequired: true,), // 🔥 marca este campo como obligatorio
+              _buildTextField(controller:recipeNameController,label: 'Recipe Name',isRequired: true,), // 🔥 marca este campo como obligatorio
               SizedBox(height: 12),
-              _buildTextField(controller:_authorController,label: 'Author',isRequired: true,),
+              _buildTextField(controller:authorController,label: 'Author',isRequired: true,),
               SizedBox(height: 12),
-              _buildTextField(controller:_imagePathController,label: 'Image URL or Path',),
+              _buildTextField(controller:imagePathController,label: 'Image URL or Path',),
               SizedBox(height: 12),
-              _buildTextField(controller:_recipeController,label: 'Recipe',isRequired: true,),
+              _buildTextField(controller:recipeController,label: 'Recipe',isRequired: true,),
               SizedBox(height: 16),
               Center(
                 child: ElevatedButton(
                   onPressed: () {
-                    if (_formKey.currentState != null &&
-                        _formKey.currentState!.validate()) {
+                    if (formKey.currentState != null &&
+                        formKey.currentState!.validate()) {
                       // Aquí puedes manejar el envío del formulario
                       Navigator.pop(context);
                     }
