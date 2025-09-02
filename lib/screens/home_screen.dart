@@ -21,6 +21,10 @@ class HomeScreen extends StatelessWidget {
         child: Icon(Icons.add,color:Colors.white,),
         onPressed: () {
           _showBottom(context);
+          // showCustomBottomSheet(
+          //   context: context,
+          //   child: RecipeForm(),
+          // );
         },),
     );
   }
@@ -35,12 +39,16 @@ Future<void> _showBottom(BuildContext context) async {
         builder: (context, scrollController) {
           return SingleChildScrollView(
             controller: scrollController,
-            child: Container( 
-            height: MediaQuery.of(context).size.height * 0.6, // 60% de la pantalla
-            color:Colors.white,
-            child: RecipeForm(),
+            // 🔥 quitar height fijo
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom, // se adapta al teclado
             ),
-          ); // ✅ aquí va el ;
+            child: Container(
+              color: Colors.white,
+              padding: EdgeInsets.all(16), // mantiene tu padding interno
+              child: RecipeForm(),
+            ),
+          );
         },
       );
     },
@@ -124,7 +132,7 @@ class RecipeForm extends StatelessWidget {
               SizedBox(height: 12),
               _buildTextField(controller:_authorController,label: 'Author',isRequired: true,),
               SizedBox(height: 12),
-              _buildTextField(controller:_imagePathController,label: 'Image URL or Path',isRequired: true,),
+              _buildTextField(controller:_imagePathController,label: 'Image URL or Path',),
               SizedBox(height: 12),
               _buildTextField(controller:_recipeController,label: 'Recipe',isRequired: true,),
               SizedBox(height: 16),
@@ -182,10 +190,11 @@ Widget _buildTextField({
   required TextEditingController controller,
   bool isRequired = false, // 🔥 bandera para marcar si es obligatorio
   int maxLines = 1,
+  String? Function(String?)? validator, // opcional
 }) {
   return TextFormField(
     controller: controller,
-    validator: (value) {
+     validator: validator ?? (value) { // usa el custom si lo mandan, si no usa este
       if (isRequired && (value == null || value.isEmpty)) {
         return 'Please enter $label'; // usa el label como mensaje
       }
