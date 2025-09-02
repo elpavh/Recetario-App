@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../helper_functions.dart';
+import 'package:recipe_book/screens/recipe_detail.dart';
 
 
 class HomeScreen extends StatelessWidget {
@@ -59,45 +60,50 @@ Future<void> _showBottom(BuildContext context) async {
   Widget _recipesCard(BuildContext context,{ required String title,
   required String author,
    String imagePath = '',}) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0), 
-      child: SizedBox(
-          width:MediaQuery.of(context).size.width,
-          height: 125,
-          child: Card(
-                child: Row(
-                  children: <Widget>[
-                    SizedBox(
-                      height: 125,
-                      width: 100,
-                      child: ClipRRect( 
-                        borderRadius: BorderRadius.only( 
-                          topLeft: Radius.circular(12),
-                          bottomLeft: Radius.circular(12)
+    return GestureDetector(
+      onTap: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => const RecipeDetail()));
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(8.0), 
+        child: SizedBox(
+            width:MediaQuery.of(context).size.width,
+            height: 125,
+            child: Card(
+                  child: Row(
+                    children: <Widget>[
+                      SizedBox(
+                        height: 125,
+                        width: 100,
+                        child: ClipRRect( 
+                          borderRadius: BorderRadius.only( 
+                            topLeft: Radius.circular(12),
+                            bottomLeft: Radius.circular(12)
+                          ),
+                          child: displayImage(imagePath),
                         ),
-                        child: displayImage(imagePath),
                       ),
-                    ),
-                    SizedBox(width: 26),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget> [
-                        Text(title, style: TextStyle(fontSize: 16,fontFamily: 'Quicksan',fontWeight: FontWeight.bold)),
-                        SizedBox(height: 4,), 
-                        Container( 
-                          height: 2,
-                          width: 75,
-                          color: Colors.orange
-                        ),
-                        Text(author, style: TextStyle(fontSize: 16,fontFamily: 'Quicksan')), 
-                        SizedBox(height: 4,),
-                        
-                    ],)
-                  ],
+                      SizedBox(width: 26),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget> [
+                          Text(title, style: TextStyle(fontSize: 16,fontFamily: 'Quicksan',fontWeight: FontWeight.bold)),
+                          SizedBox(height: 4,), 
+                          Container( 
+                            height: 2,
+                            width: 75,
+                            color: Colors.orange
+                          ),
+                          Text(author, style: TextStyle(fontSize: 16,fontFamily: 'Quicksan')), 
+                          SizedBox(height: 4,),
+                          
+                      ],)
+                    ],
+                  ),
                 ),
               ),
-            ),
+      ),
     );
   }
 }
